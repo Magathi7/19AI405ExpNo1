@@ -1,6 +1,6 @@
 <h1>ExpNo 1 :Developing AI Agent with PEAS Description</h1>
-<h3>Name: Saravanan N</h3>
-<h3>Register Number/Staff Id: TSML006</h3>
+<h3>Name: Magathi D</h3>
+<h3>Register Number: 212223040108 </h3>
 
 
 <h3>AIM:</h3>
@@ -40,3 +40,60 @@
 <p>Treat unhealthy patients in each room. And check for the unhealthy patients in random room</p>
 <h3>STEP 5:</h3>
 <p>Measure the performance parameters: For each treatment performance incremented, for each movement performance decremented</p>
+
+## Program
+```
+import random
+class MedicineAgent:
+    def __init__(self):
+        self.location = random.choice(['Room A', 'Room B'])
+        self.performance = 0
+        print("Agent starts in:", self.location)
+
+    def sense_temperature(self, environment):
+        return environment[self.location]
+
+    def treat_patient(self, environment):
+        temperature = self.sense_temperature(environment)
+        print(f"Checking {self.location} | Temperature: {temperature}")
+
+        if temperature > 98.5:
+            print("Patient is unhealthy. Prescribing medicine...")
+            environment[self.location] = 98.5
+            self.performance += 10
+        else:
+            print("Patient is healthy.")
+
+    def move(self):
+        if self.location == 'Room A':
+            self.location = 'Room B'
+        else:
+            self.location = 'Room A'
+
+        print("Moving to", self.location)
+        self.performance -= 1
+
+    def run(self, environment):
+        self.treat_patient(environment)
+        self.move()
+        self.treat_patient(environment)
+        print("\nFinal Performance:", self.performance)
+
+environment = {
+    'Room A': round(random.uniform(97, 102), 1),
+    'Room B': round(random.uniform(97, 102), 1)
+}
+print("Initial Environment:", environment)
+
+agent = MedicineAgent()
+agent.run(environment)
+
+
+```
+
+## Output
+<img width="699" height="404" alt="image" src="https://github.com/user-attachments/assets/e59cce4e-dc9e-4e69-9c41-fc0aeb32fed9" />
+
+
+## Result
+Thus the Developing AI Agent with PEAS Description was implemented using python programming.
